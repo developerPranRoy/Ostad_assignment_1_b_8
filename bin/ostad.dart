@@ -9,7 +9,6 @@ void main (){
   books1.read(20);
   books2.read(51);
   books3.read(32);
-  print(books3);
 
 for (var book in [books1,books2,books3]){
 
