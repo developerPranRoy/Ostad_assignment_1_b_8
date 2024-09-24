@@ -1,61 +1,29 @@
-import 'package:args/args.dart';
+import 'books.dart';
+void main (){
 
-const String version = '0.0.1';
+  Books books1=Books("Pranto", "author", 2023);
+  Books books2=Books("Roy", "author", 2020);
+  Books books3=Books("Kumar", "author", 2000);
 
-ArgParser buildParser() {
-  return ArgParser()
-    ..addFlag(
-      'help',
-      abbr: 'h',
-      negatable: false,
-      help: 'Print this usage information.',
-    )
-    ..addFlag(
-      'verbose',
-      abbr: 'v',
-      negatable: false,
-      help: 'Show additional command output.',
-    )
-    ..addFlag(
-      'version',
-      negatable: false,
-      help: 'Print the tool version.',
-    );
+
+  books1.read(20);
+  books2.read(51);
+  books3.read(32);
+  print(books3);
+
+for (var book in [books1,books2,books3]){
+
+  print("Title: ${book.getTitle()}");
+  print("Author: ${book.getAuthor()}");
+  print("Publication Year: ${book.getpublicationYear()}");
+  print("Pages Read: ${book.getPagesRead()}");
+  print("Book Age: ${book.getBookAge()} years\n");
+
 }
 
-void printUsage(ArgParser argParser) {
-  print('Usage: dart ostad.dart <flags> [arguments]');
-  print(argParser.usage);
-}
+print("Total number of books created: ${Books.totalBooks}");
 
-void main(List<String> arguments) {
-  final ArgParser argParser = buildParser();
-  try {
-    final ArgResults results = argParser.parse(arguments);
-    bool verbose = false;
 
-    // Process the parsed arguments.
-    if (results.wasParsed('help')) {
-      printUsage(argParser);
-      return;
-    }
-    if (results.wasParsed('version')) {
-      print('ostad version: $version');
-      return;
-    }
-    if (results.wasParsed('verbose')) {
-      verbose = true;
-    }
 
-    // Act on the arguments provided.
-    print('Positional arguments: ${results.rest}');
-    if (verbose) {
-      print('[VERBOSE] All arguments: ${results.arguments}');
-    }
-  } on FormatException catch (e) {
-    // Print usage information if an invalid argument was provided.
-    print(e.message);
-    print('');
-    printUsage(argParser);
-  }
+
 }
